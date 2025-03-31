@@ -1,8 +1,6 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Container from '@/components/Container.astro'
-import Link from '@/components/Link.astro'
-import ProjectCard from '@/components/ProjectCard.astro'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getCollection } from 'astro:content'
@@ -16,40 +14,28 @@ const projects = await getCollection('projects')
 
     <section>
       <div class="min-w-full">
-        <div class="prose prose-neutral mb-8 dark:prose-invert">
-          <p class="mb-4">
-            astro-erudite is an opinionated, no-frills static blogging template
-            that prioritizes simplicity and performance, built with <Link
-              href="https://astro.build"
-              class="text-foreground"
-              external
-              underline>Astro</Link
-            >, <Link
-              href="https://tailwindcss.com"
-              class="text-foreground"
-              external
-              underline>Tailwind</Link
-            >, and <Link
-              href="https://ui.shadcn.com"
-              class="text-foreground"
-              external
-              underline>shadcn/ui</Link
-            >. It provides a clean foundation for your content while being
-            extremely easy to customize.
+        <div class="prose prose-neutral mb-8 text-xl dark:prose-invert">
+          <h3 class="font-instument text-3xl">
+            🔥 Hi! I am handler of Hokori Otaku
+          </h3>
+          <p>
+            🔩I started my Instagram page to share the things I love, Like
+            Anime, Manga, Books, Movies and More!!
           </p>
           <p>
-            To learn more about the philosophy behind this template, check out
-            the following blog post: <Link
-              href="/blog/the-state-of-static-blogs"
-              class="text-foreground"
-              underline>The State of Static Blogs in 2024</Link
-            >.
+            🧑‍💻By profession I am a Web Developer and for my Side project I
+            thought why not just extend my Hobby, and that's how this site came
+            to be! While I am also learning a New Tech-Stack with this project I
+            am also Sharing my Instagram Content Here!!
           </p>
-        </div>
-
-        <h2 class="mb-4 text-2xl font-semibold">Example Projects Listing</h2>
-        <div class="flex flex-col gap-4">
-          {projects.map((project) => <ProjectCard project={project} />)}
+          <p>
+            😉Hope you find something interesting somewhere here! I am always
+            finding ideas to improve this site and if you think i can add
+            something that can make the user experience more better than please
+            connect with me on my Instagram (@hokori.otaku) Instagram and I
+            would love to here from you!! Thank you for visiting my cornor of
+            the Internet!!!❤️
+          </p>
         </div>
       </div>
     </section>

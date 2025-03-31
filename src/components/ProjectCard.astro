@@ -21,13 +21,13 @@ const { project } = Astro.props
   >
     {
       project.data.image && (
-        <div class="max-w-[200px] sm:flex-shrink-0">
+        <div class="w-full overflow-hidden rounded-2xl sm:flex-shrink-0">
           <Image
             src={project.data.image}
             alt={project.data.name}
             width={1200}
             height={630}
-            class="object-cover"
+            class="h-full w-full object-cover"
           />
         </div>
       )

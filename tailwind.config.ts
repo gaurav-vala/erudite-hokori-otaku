@@ -9,6 +9,7 @@ const config: Config = {
       fontFamily: {
         sans: ['Geist', ...defaultTheme.fontFamily.sans],
         mono: ['Geist Mono', ...defaultTheme.fontFamily.mono],
+        instument: ['Instrument Serif'],
       },
       colors: {
         background: 'hsl(var(--background))',

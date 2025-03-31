@@ -19,7 +19,7 @@ export async function getStaticPaths() {
   const posts = await getCollection('blog')
   const tags = posts.flatMap((post) => post.data.tags || [])
   const uniqueTags = Array.from(
-    new Set(tags.filter((tag): tag is string => typeof tag === 'string')),
+    new Set(tags.filter((tag): tag is string => typeof tag === 'string'))
   )
 
   return uniqueTags.map((tag) => ({
@@ -44,7 +44,7 @@ export async function getStaticPaths() {
       ]}
     />
     <div class="flex flex-wrap items-center gap-2">
-      <h1 class="text-3xl font-semibold">Posts tagged with</h1>
+      <h1 class="font-instument text-3xl font-semibold">Posts tagged with</h1>
       <span
         class="flex items-center gap-x-1 rounded-full bg-secondary px-4 py-2 text-2xl font-semibold"
       >
