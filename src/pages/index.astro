@@ -2,16 +2,30 @@
 import BlogCard from '@/components/BlogCard.astro'
 import Container from '@/components/Container.astro'
 import Link from '@/components/Link.astro'
+import { badgeVariants } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
+import { Icon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
 
 const blog = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE)
+
+const tagCounts = blog.reduce((acc, post) => {
+  post.data.tags?.forEach((tag) => {
+    acc.set(tag, (acc.get(tag) || 0) + 1)
+  })
+  return acc
+}, new Map())
+
+const tags = [...tagCounts.keys()].sort((a, b) => {
+  const countDiff = tagCounts.get(b)! - tagCounts.get(a)!
+  return countDiff !== 0 ? countDiff : a.localeCompare(b)
+})
 ---
 
 <Layout
@@ -57,6 +71,22 @@ const blog = (await getCollection('blog'))
             >&rarr;</span
           >
         </Link>
+      </div>
+    </section>
+    <section class="flex flex-col gap-y-4">
+      <h2 class="text-2xl font-bold">Posts by Tags</h2>
+      <div class="flex flex-wrap gap-2">
+        {
+          tags.map((tag) => (
+            <a
+              href={`/tags/${tag}`}
+              class={badgeVariants({ variant: 'secondary' })}
+            >
+              <Icon name="lucide:hash" class="size-3 -translate-x-0.5" />
+              {tag}
+            </a>
+          ))
+        }
       </div>
     </section>
   </Container>

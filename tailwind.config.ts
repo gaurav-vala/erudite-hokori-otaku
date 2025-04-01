@@ -10,6 +10,7 @@ const config: Config = {
         sans: ['Geist', ...defaultTheme.fontFamily.sans],
         mono: ['Geist Mono', ...defaultTheme.fontFamily.mono],
         instument: ['Instrument Serif'],
+        noto: ['Noto Serif Display'],
       },
       colors: {
         background: 'hsl(var(--background))',

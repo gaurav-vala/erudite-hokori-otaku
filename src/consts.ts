@@ -31,5 +31,6 @@ export const NAV_LINKS: Link[] = [
 
 export const SOCIAL_LINKS: Link[] = [
   { href: 'https://x.com/hokoriOtaku', label: 'Twitter' },
+  { href: 'https://www.instagram.com/hokori.otaku', label: 'Instagram' },
   { href: '/rss.xml', label: 'RSS' },
 ]
