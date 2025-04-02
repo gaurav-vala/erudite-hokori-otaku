@@ -18,7 +18,7 @@ export const SITE: Site = {
     'Welcome to my world. I’m passionate about anime, manga, movies, music, and books. I love all kinds of pop culture and share my interests on Instagram. Join me if you’re interested!',
   EMAIL: '',
   NUM_POSTS_ON_HOMEPAGE: 5,
-  POSTS_PER_PAGE: 5,
+  POSTS_PER_PAGE: 8,
   SITEURL: 'https://hokoriotaku.vercel.app/',
 }
 

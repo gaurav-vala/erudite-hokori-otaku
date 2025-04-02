@@ -158,6 +158,39 @@ const authors = await parseAuthors(post.data.authors ?? [])
       class="prose prose-lg col-start-2 max-w-none dark:prose-invert prose-headings:tracking-normal prose-headings:text-red-500"
     >
       <Content />
+
+      <p class="my-0 font-semibold">
+        If you liked the post, check out more from
+      </p>
+      <div class="w-fit">
+        {
+          authors.map((author, index) => (
+            <>
+              <div class="flex items-center gap-x-1.5">
+                <Image
+                  src={author.avatar}
+                  alt={author.name}
+                  width={24}
+                  height={24}
+                  class="my-0 rounded-full"
+                />
+                {author.isRegistered ? (
+                  <Link
+                    href={`/authors/${author.id}`}
+                    underline
+                    class="text-foreground"
+                  >
+                    <span>{author.name}</span>
+                  </Link>
+                ) : (
+                  <span>{author.name}</span>
+                )}
+              </div>
+              {index < authors.length - 1 && ', '}
+            </>
+          ))
+        }
+      </div>
     </article>
 
     <PostNavigation prevPost={prevPost} nextPost={nextPost} />
