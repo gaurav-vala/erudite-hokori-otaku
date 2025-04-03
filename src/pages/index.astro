@@ -11,12 +11,12 @@ import { Icon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
 
 const blog = (await getCollection('blog'))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .filter((post: any) => !post.data.draft)
+  .sort((a: any, b: any) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE)
 
-const tagCounts = blog.reduce((acc, post) => {
-  post.data.tags?.forEach((tag) => {
+const tagCounts = blog.reduce((acc: any, post: any) => {
+  post.data.tags?.forEach((tag: any) => {
     acc.set(tag, (acc.get(tag) || 0) + 1)
   })
   return acc
@@ -54,7 +54,7 @@ const tags = [...tagCounts.keys()].sort((a, b) => {
       <h2 class="text-2xl font-bold">Latest posts</h2>
       <ul class="not-prose flex flex-col gap-y-4">
         {
-          blog.map((post) => (
+          blog.map((post: any) => (
             <li>
               <BlogCard entry={post} />
             </li>
