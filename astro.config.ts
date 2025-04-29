@@ -21,7 +21,7 @@ import icon from 'astro-icon'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://hokoriotaku.vercel.app/',
+  site: 'https://hokoriotaku.space',
   integrations: [
     tailwind({
       applyBaseStyles: false,
