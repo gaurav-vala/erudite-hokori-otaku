@@ -1,4 +1,6 @@
+@import 'inter-ui/inter.css';
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -85,7 +87,7 @@
 
 @layer components {
   article {
-    @apply prose prose-headings:scroll-mt-20 prose-headings:break-words prose-headings:font-instument prose-headings:italic first:prose-headings:mt-0 prose-h2:text-rose-500 prose-p:break-words prose-a:!break-words prose-a:text-rose-500 prose-a:!decoration-muted-foreground prose-a:underline-offset-[3px] prose-a:transition-colors hover:prose-a:!decoration-foreground prose-pre:!px-0 prose-img:mx-auto;
+    @apply prose prose-headings:scroll-mt-20 prose-headings:break-words prose-headings:font-sans prose-headings:font-black prose-headings:uppercase first:prose-headings:mt-0 prose-h2:text-rose-500 prose-p:break-words prose-a:!break-words prose-a:text-rose-500 prose-a:!decoration-muted-foreground prose-a:underline-offset-[3px] prose-a:transition-colors hover:prose-a:!decoration-foreground prose-pre:!px-0 prose-img:mx-auto;
 
     .katex-display {
       @apply overflow-x-auto overflow-y-hidden py-4;
@@ -192,6 +194,9 @@
   }
 }
 
+* {
+  @apply tracking-tight;
+}
 body {
   position: relative;
 

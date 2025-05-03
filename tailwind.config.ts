@@ -7,10 +7,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Geist', ...defaultTheme.fontFamily.sans],
-        mono: ['Geist Mono', ...defaultTheme.fontFamily.mono],
+        sans: ['Inter'],
         instument: ['Instrument Serif'],
-        noto: ['Noto Serif Display'],
+        noto: ['Noto Serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
