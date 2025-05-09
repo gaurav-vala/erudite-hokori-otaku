@@ -1,36 +1,55 @@
-export type Site = {
-  TITLE: string
-  DESCRIPTION: string
-  EMAIL: string
-  NUM_POSTS_ON_HOMEPAGE: number
-  POSTS_PER_PAGE: number
-  SITEURL: string
-}
-
-export type Link = {
-  href: string
-  label: string
-}
+import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
-  TITLE: 'Hokori Otaku',
-  DESCRIPTION:
-    'Welcome to my world. I’m passionate about anime, manga, movies, music, and books. I love all kinds of pop culture and share my interests on Instagram. Join me if you’re interested!',
-  EMAIL: '',
-  NUM_POSTS_ON_HOMEPAGE: 5,
-  POSTS_PER_PAGE: 8,
-  SITEURL: 'https://hokoriotaku.vercel.app/',
+  title: 'astro-erudite',
+  description:
+    'astro-erudite is a opinionated, unstyled blogging template—built with Astro, Tailwind, and shadcn/ui.',
+  href: 'https://astro-erudite.vercel.app',
+  author: 'jktrn',
+  locale: 'en-US',
+  featuredPostCount: 2,
+  postsPerPage: 3,
 }
 
-export const NAV_LINKS: Link[] = [
-  { href: '/blog', label: 'posts' },
-  { href: '/authors', label: 'authors' },
-  { href: '/about', label: 'about' },
-  { href: '/tags', label: 'tags' },
+export const NAV_LINKS: SocialLink[] = [
+  {
+    href: '/blog',
+    label: 'blog',
+  },
+  {
+    href: '/authors',
+    label: 'authors',
+  },
+  {
+    href: '/about',
+    label: 'about',
+  },
 ]
 
-export const SOCIAL_LINKS: Link[] = [
-  { href: 'https://x.com/hokoriOtaku', label: 'Twitter' },
-  { href: 'https://www.instagram.com/hokori.otaku', label: 'Instagram' },
-  { href: '/rss.xml', label: 'RSS' },
+export const SOCIAL_LINKS: SocialLink[] = [
+  {
+    href: 'https://github.com/jktrn',
+    label: 'GitHub',
+  },
+  {
+    href: 'https://twitter.com/enscry',
+    label: 'Twitter',
+  },
+  {
+    href: 'mailto:jason@enscribe.dev',
+    label: 'Email',
+  },
+  {
+    href: '/rss.xml',
+    label: 'RSS',
+  },
 ]
+
+export const ICON_MAP: IconMap = {
+  Website: 'lucide:globe',
+  GitHub: 'lucide:github',
+  LinkedIn: 'lucide:linkedin',
+  Twitter: 'lucide:twitter',
+  Email: 'lucide:mail',
+  RSS: 'lucide:rss',
+}

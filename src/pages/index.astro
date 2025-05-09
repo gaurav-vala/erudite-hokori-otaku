@@ -9,6 +9,7 @@ import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { Icon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
+import { ChevronRight } from 'lucide-react'
 
 const blog = (await getCollection('blog'))
   .filter((post: any) => !post.data.draft)
@@ -26,6 +27,9 @@ const tags = [...tagCounts.keys()].sort((a, b) => {
   const countDiff = tagCounts.get(b)! - tagCounts.get(a)!
   return countDiff !== 0 ? countDiff : a.localeCompare(b)
 })
+
+const mangaPosts = blog.filter((post: any) => post.data.tags?.includes('manga'))
+const animePosts = blog.filter((post: any) => post.data.tags?.includes('anime'))
 ---
 
 <Layout
@@ -72,6 +76,48 @@ const tags = [...tagCounts.keys()].sort((a, b) => {
           >
         </Link>
       </div>
+    </section>
+    <section class="flex flex-col gap-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold">Anime Posts</h2>
+        <a class="flex items-center hover:underline" href="/tags/anime"
+          >See All <ChevronRight size={18} /></a
+        >
+      </div>
+      {
+        animePosts.length > 0 ? (
+          <ul class="not-prose flex flex-col gap-y-4">
+            {animePosts.map((post: any) => (
+              <li>
+                <BlogCard entry={post} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No posts available in manga tag yet.</p>
+        )
+      }
+    </section>
+    <section class="flex flex-col gap-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold">Manga Posts</h2>
+        <a class="flex items-center hover:underline" href="/tags/manga"
+          >See All <ChevronRight size={18} /></a
+        >
+      </div>
+      {
+        mangaPosts.length > 0 ? (
+          <ul class="not-prose flex flex-col gap-y-4">
+            {mangaPosts.map((post: any) => (
+              <li>
+                <BlogCard entry={post} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No posts available in manga tag yet.</p>
+        )
+      }
     </section>
     <section class="flex flex-col gap-y-4">
       <h2 class="text-2xl font-bold">Posts by Tags</h2>
