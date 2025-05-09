@@ -8,13 +8,13 @@ import { getCollection } from 'astro:content'
 const projects = await getCollection('projects')
 ---
 
-<Layout title="About" description={SITE.DESCRIPTION}>
+<Layout title="About" description={SITE.description}>
   <Container class="flex flex-col gap-y-6">
     <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
 
     <section>
       <div class="min-w-full">
-        <div class="prose prose-neutral mb-8 text-xl dark:prose-invert">
+        <div class="prose prose-neutral dark:prose-invert mb-8 text-xl">
           <h3 class="font-instument text-3xl">
             🔥 Hi! I am handler of Hokori Otaku
           </h3>

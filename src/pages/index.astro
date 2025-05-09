@@ -14,7 +14,7 @@ import { ChevronRight } from 'lucide-react'
 const blog = (await getCollection('blog'))
   .filter((post: any) => !post.data.draft)
   .sort((a: any, b: any) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE)
+  .slice(0, SITE.featuredPostCount)
 
 const tagCounts = blog.reduce((acc: any, post: any) => {
   post.data.tags?.forEach((tag: any) => {
@@ -34,7 +34,7 @@ const animePosts = blog.filter((post: any) => post.data.tags?.includes('anime'))
 
 <Layout
   title="Home"
-  description={SITE.DESCRIPTION}
+  description={SITE.description}
   image="/static/1200x630.png"
 >
   <Container class="flex flex-col gap-y-6">
