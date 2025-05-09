@@ -1,14 +1,14 @@
 import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
-  title: 'astro-erudite',
+  title: 'Hokori Otaku',
   description:
-    'astro-erudite is a opinionated, unstyled blogging template—built with Astro, Tailwind, and shadcn/ui.',
-  href: 'https://astro-erudite.vercel.app',
-  author: 'jktrn',
+    'Welcome to my world. I’m passionate about anime, manga, movies, music, and books. I love all kinds of pop culture and share my interests on Instagram. Join me if you’re interested!',
+  href: 'https://www.hokoriotaku.space/',
+  author: 'Gaurav',
   locale: 'en-US',
-  featuredPostCount: 2,
-  postsPerPage: 3,
+  featuredPostCount: 4,
+  postsPerPage: 8,
 }
 
 export const NAV_LINKS: SocialLink[] = [
@@ -24,20 +24,20 @@ export const NAV_LINKS: SocialLink[] = [
     href: '/about',
     label: 'about',
   },
+  {
+    href: '/tags',
+    label: 'tags',
+  },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    href: 'https://github.com/jktrn',
-    label: 'GitHub',
-  },
-  {
-    href: 'https://twitter.com/enscry',
+    href: 'https://x.com/hokori_otakuu',
     label: 'Twitter',
   },
   {
-    href: 'mailto:jason@enscribe.dev',
-    label: 'Email',
+    href: 'https://www.instagram.com/hokori.otaku/',
+    label: 'Instagram',
   },
   {
     href: '/rss.xml',

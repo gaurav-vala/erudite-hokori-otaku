@@ -1,10 +1,9 @@
 ---
 import BlogCard from '@/components/BlogCard.astro'
-import Container from '@/components/Container.astro'
+import BlogCard1 from '@/components/BlogCard1.astro'
 import Link from '@/components/Link.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { Icon } from 'astro-icon/components'
@@ -15,6 +14,10 @@ const blog = (await getCollection('blog'))
   .filter((post: any) => !post.data.draft)
   .sort((a: any, b: any) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, SITE.featuredPostCount)
+
+const allPosts = (await getCollection('blog'))
+  .filter((post: any) => !post.data.draft)
+  .sort((a: any, b: any) => b.data.date.valueOf() - a.data.date.valueOf())
 
 const tagCounts = blog.reduce((acc: any, post: any) => {
   post.data.tags?.forEach((tag: any) => {
@@ -28,8 +31,12 @@ const tags = [...tagCounts.keys()].sort((a, b) => {
   return countDiff !== 0 ? countDiff : a.localeCompare(b)
 })
 
-const mangaPosts = blog.filter((post: any) => post.data.tags?.includes('manga'))
-const animePosts = blog.filter((post: any) => post.data.tags?.includes('anime'))
+const mangaPosts = allPosts
+  .filter((post: any) => post.data.tags?.includes('manga'))
+  .slice(0, 4)
+const animePosts = allPosts
+  .filter((post: any) => post.data.tags?.includes('anime'))
+  .slice(0, 4)
 ---
 
 <Layout
@@ -37,103 +44,99 @@ const animePosts = blog.filter((post: any) => post.data.tags?.includes('anime'))
   description={SITE.description}
   image="/static/1200x630.png"
 >
-  <Container class="flex flex-col gap-y-6">
-    <section>
-      <Card>
-        <CardHeader>
-          <CardTitle className="font-instument text-3xl"
-            >Hokori Otaku Collections</CardTitle
-          >
-        </CardHeader>
-        <CardContent>
-          <p class="mb-2 text-lg tracking-tight">
-            Welcome to my world. I’m passionate about anime, manga, movies,
-            music, and books. I love all kinds of pop culture and share my
-            interests on Instagram. Join me if you’re interested!
-          </p>
-        </CardContent>
-      </Card>
-    </section>
-    <section class="flex flex-col gap-y-4">
-      <h2 class="text-2xl font-bold">Latest posts</h2>
-      <ul class="not-prose flex flex-col gap-y-4">
-        {
-          blog.map((post: any) => (
-            <li>
-              <BlogCard entry={post} />
+  <section class="mb-4">
+    <div>
+      <h1
+        class="font-instrument text-5xl font-bold tracking-tighter text-red-500 italic"
+      >
+        Hokori Otaku Collections
+      </h1>
+      <p class="leadding-tight mt-2 text-xl tracking-tight">
+        Welcome to my world. I’m passionate about anime, manga, movies, music,
+        and books. I love all kinds of pop culture and share my interests on
+        Instagram. Join me if you’re interested!
+      </p>
+    </div>
+  </section>
+  <section class="flex flex-col gap-y-4">
+    <h2 class="border-b pb-2 text-2xl font-bold">Latest posts</h2>
+    <ul class="not-prose flex flex-col gap-y-4">
+      {
+        blog.map((post: any) => (
+          <li>
+            <BlogCard entry={post} />
+          </li>
+        ))
+      }
+    </ul>
+    <div class="flex justify-center">
+      <Link
+        href="/blog"
+        class={buttonVariants({ variant: 'ghost' }) + ' group'}
+      >
+        See all posts <span
+          class="ml-1.5 transition-transform group-hover:translate-x-1"
+          >&rarr;</span
+        >
+      </Link>
+    </div>
+  </section>
+  <section class="flex flex-col gap-y-4">
+    <div class="flex items-center justify-between border-b pb-2">
+      <h2 class="text-2xl font-bold uppercase">Anime Posts</h2>
+      <a class="flex items-center hover:underline" href="/tags/anime"
+        >See All <ChevronRight size={18} /></a
+      >
+    </div>
+    {
+      animePosts.length > 0 ? (
+        <ul class="not-prose flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth">
+          {animePosts.map((post) => (
+            <li class="w-[min(80%,300px)] flex-shrink-0 snap-start">
+              <BlogCard1 entry={post} />
             </li>
-          ))
-        }
-      </ul>
-      <div class="flex justify-center">
-        <Link
-          href="/blog"
-          class={buttonVariants({ variant: 'ghost' }) + ' group'}
-        >
-          See all posts <span
-            class="ml-1.5 transition-transform group-hover:translate-x-1"
-            >&rarr;</span
+          ))}
+        </ul>
+      ) : (
+        <p>No posts available in anime tag yet.</p>
+      )
+    }
+  </section>
+  <section class="flex flex-col gap-y-4">
+    <div class="flex items-center justify-between border-b pb-2">
+      <h2 class="text-2xl font-bold uppercase">Manga Posts</h2>
+      <a class="flex items-center hover:underline" href="/tags/manga">
+        See All <ChevronRight size={18} />
+      </a>
+    </div>
+    {
+      mangaPosts.length > 0 ? (
+        <ul class="not-prose flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth">
+          {mangaPosts.map((post: any) => (
+            <li class="w-[min(80%,300px)] flex-shrink-0 snap-start">
+              <BlogCard1 entry={post} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No posts available in manga tag yet.</p>
+      )
+    }
+  </section>
+  <section class="flex flex-col gap-y-4">
+    <h2 class="text-2xl font-bold">Posts by Tags</h2>
+    <div class="flex flex-wrap gap-2">
+      {
+        tags.map((tag) => (
+          <a
+            href={`/tags/${tag}`}
+            class={badgeVariants({ variant: 'secondary' })}
           >
-        </Link>
-      </div>
-    </section>
-    <section class="flex flex-col gap-y-4">
-      <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-bold">Anime Posts</h2>
-        <a class="flex items-center hover:underline" href="/tags/anime"
-          >See All <ChevronRight size={18} /></a
-        >
-      </div>
-      {
-        animePosts.length > 0 ? (
-          <ul class="not-prose flex flex-col gap-y-4">
-            {animePosts.map((post: any) => (
-              <li>
-                <BlogCard entry={post} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No posts available in manga tag yet.</p>
-        )
+            <Icon name="lucide:hash" class="size-3 -translate-x-0.5" />
+            {tag}
+          </a>
+        ))
       }
-    </section>
-    <section class="flex flex-col gap-y-4">
-      <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-bold">Manga Posts</h2>
-        <a class="flex items-center hover:underline" href="/tags/manga"
-          >See All <ChevronRight size={18} /></a
-        >
-      </div>
-      {
-        mangaPosts.length > 0 ? (
-          <ul class="not-prose flex flex-col gap-y-4">
-            {mangaPosts.map((post: any) => (
-              <li>
-                <BlogCard entry={post} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No posts available in manga tag yet.</p>
-        )
-      }
-    </section>
-    <section class="flex flex-col gap-y-4">
-      <h2 class="text-2xl font-bold">Posts by Tags</h2>
-      <div class="flex flex-wrap gap-2">
-        {
-          tags.map((tag) => (
-            <a
-              href={`/tags/${tag}`}
-              class={badgeVariants({ variant: 'secondary' })}
-            >
-              <Icon name="lucide:hash" class="size-3 -translate-x-0.5" />
-              {tag}
-            </a>
-          ))
-        }
-      </div>
-    </section>
-  </Container>
+    </div>
+  </section>
 </Layout>

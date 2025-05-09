@@ -5,31 +5,31 @@
     @apply text-foreground text-base leading-7;
 
     p {
-      @apply text-foreground/80 font-noto my-5 text-lg leading-[1.8] not-first:mt-5;
+      @apply text-foreground/85 font-noto my-5 text-lg leading-[1.8] not-first:mt-5;
     }
 
     h1 {
-      @apply text-foreground mt-0 mb-6 scroll-m-20 font-sans text-4xl leading-5 font-black uppercase;
+      @apply mt-0 mb-6 scroll-m-20 font-sans text-4xl leading-5 font-black text-red-500 uppercase;
     }
 
     h2 {
-      @apply text-foreground mt-8 mb-4 scroll-m-20 font-sans text-2xl leading-5 font-black uppercase;
+      @apply mt-8 mb-4 scroll-m-20 font-sans text-2xl leading-5 font-black text-red-500 uppercase;
     }
 
     h3 {
-      @apply text-foreground mt-6 mb-4 scroll-m-20 font-sans text-xl leading-6 font-black uppercase;
+      @apply mt-6 mb-4 scroll-m-20 font-sans text-xl leading-6 font-black text-red-500 uppercase;
     }
 
     h4 {
-      @apply text-foreground mt-6 mb-3 scroll-m-20 font-sans text-lg leading-6 font-black uppercase;
+      @apply mt-6 mb-3 scroll-m-20 font-sans text-lg leading-6 font-black text-red-500 uppercase;
     }
 
     h5 {
-      @apply text-foreground mt-5 mb-3 scroll-m-20 font-sans leading-6 font-black uppercase;
+      @apply mt-5 mb-3 scroll-m-20 font-sans leading-6 font-black text-red-500 uppercase;
     }
 
     h6 {
-      @apply text-foreground mt-5 mb-3 scroll-m-20 font-sans leading-6 font-black uppercase;
+      @apply mt-5 mb-3 scroll-m-20 font-sans leading-6 font-black text-red-500 uppercase;
     }
 
     a {
@@ -99,7 +99,7 @@
     video,
     figure,
     .expressive-code {
-      @apply my-6;
+      @apply my-6 opacity-80;
     }
 
     summary {
