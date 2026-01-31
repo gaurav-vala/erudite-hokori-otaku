@@ -5,7 +5,7 @@
     @apply text-foreground text-base leading-7;
 
     p {
-      @apply text-foreground/85 font-noto my-5 text-lg leading-[1.8] not-first:mt-5;
+      @apply text-foreground/85 my-5 font-sans text-lg leading-[1.8] not-first:mt-5;
     }
 
     h1 {

@@ -92,7 +92,7 @@ const animePosts = allPosts
       animePosts.length > 0 ? (
         <ul class="not-prose flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth">
           {animePosts.map((post) => (
-            <li class="w-[min(80%,300px)] flex-shrink-0 snap-start">
+            <li class="w-[min(80%,300px)] shrink-0 snap-start">
               <BlogCard1 entry={post} />
             </li>
           ))}
@@ -113,7 +113,7 @@ const animePosts = allPosts
       mangaPosts.length > 0 ? (
         <ul class="not-prose flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth">
           {mangaPosts.map((post: any) => (
-            <li class="w-[min(80%,300px)] flex-shrink-0 snap-start">
+            <li class="w-[min(80%,300px)] shrink-0 snap-start">
               <BlogCard1 entry={post} />
             </li>
           ))}

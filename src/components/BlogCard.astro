@@ -30,7 +30,7 @@ const authors = await parseAuthors(entry.data.authors ?? [])
   >
     {
       entry.data.image && (
-        <div class="w-full overflow-hidden rounded-xl sm:flex-shrink-0 md:max-w-[360px]">
+        <div class="w-full overflow-hidden rounded-xl sm:shrink-0 md:max-w-[360px]">
           <Image
             src={entry.data.image}
             alt={entry.data.title}
@@ -41,7 +41,7 @@ const authors = await parseAuthors(entry.data.authors ?? [])
         </div>
       )
     }
-    <div class="flex-grow">
+    <div class="grow">
       <h3 class="font-instrument mb-1 text-3xl font-semibold text-red-500">
         {entry.data.title}
       </h3>
