@@ -1,0 +1,59 @@
+---
+/**
+ * GoogleAd component for manual ad placement.
+ *
+ * Usage:
+ *   <GoogleAd slot="1234567890" format="auto" />
+ *   <GoogleAd slot="1234567890" format="rectangle" />
+ *   <GoogleAd slot="1234567890" format="horizontal" />
+ *
+ * Get your slot IDs from: https://adsense.google.com → Ads → By ad unit
+ */
+
+export interface Props {
+  /** Ad unit slot ID from your AdSense dashboard (Ad unit ID) */
+  slot: string
+  /** Ad format: 'auto' | 'rectangle' | 'horizontal' | 'vertical' */
+  format?: 'auto' | 'rectangle' | 'horizontal' | 'vertical'
+  /** Whether to enable full-width responsive ads */
+  fullWidth?: boolean
+  /** Additional CSS class for the wrapper */
+  class?: string
+}
+
+const {
+  slot,
+  format = 'auto',
+  fullWidth = true,
+  class: className = '',
+} = Astro.props
+
+const PUBLISHER_ID = 'ca-pub-4168719811963515'
+---
+
+<div
+  class={`google-ad-wrapper my-6 w-full overflow-hidden text-center ${className}`}
+>
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-client={PUBLISHER_ID}
+    data-ad-slot={slot}
+    data-ad-format={format}
+    data-full-width-responsive={fullWidth ? 'true' : 'false'}
+  >
+  </ins>
+</div>
+
+<script>
+  // Initialize the ad unit after DOM is ready.
+  // Wrapped in a try/catch to gracefully handle ad blockers.
+  document.addEventListener('astro:page-load', () => {
+    try {
+      // @ts-ignore
+      ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+    } catch (e) {
+      console.warn('AdSense ad could not be loaded.')
+    }
+  })
+</script>
