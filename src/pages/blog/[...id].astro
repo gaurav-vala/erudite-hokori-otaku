@@ -27,10 +27,48 @@ const currentPostId = Astro.params.id
 const { Content, headings } = await render(post)
 const { next, prev } = await getAdjacentPosts(currentPostId)
 const authors = await parseAuthors(post.data.authors ?? [])
+
+const canonicalURL = new URL(`/blog/${currentPostId}`, Astro.site).toString()
+const ogImage = post?.data?.image?.src
+  ? new URL(post.data.image.src, Astro.site).toString()
+  : new URL('/static/1200x630.png', Astro.site).toString()
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  image: ogImage,
+  datePublished: post.data.date?.toISOString(),
+  dateModified: post.data.date?.toISOString(),
+  author: authors.map((a) => ({
+    '@type': 'Person',
+    name: a.name,
+    url: a.isRegistered
+      ? new URL(`/authors/${a.id}`, Astro.site).toString()
+      : undefined,
+  })),
+  publisher: {
+    '@type': 'Organization',
+    name: 'Hokori Otaku',
+    url: Astro.site,
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL('/favicon-96x96.png', Astro.site).toString(),
+    },
+  },
+  url: canonicalURL,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalURL,
+  },
+  keywords: post.data.tags?.join(', '),
+})
 ---
 
 <Layout isWide>
   <PostHead slot="head" post={post} />
+  <script slot="head" type="application/ld+json" set:html={jsonLd} />
   <section
     class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
   >
@@ -163,7 +201,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
 
           scrollToTopButton.classList.toggle(
             'hidden',
-            window.scrollY <= 300 || isFooterVisible
+            window.scrollY <= 300 || isFooterVisible,
           )
         })
       }
