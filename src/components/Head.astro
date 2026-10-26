@@ -2,6 +2,31 @@
 import { SITE } from '@/consts'
 import { ClientRouter } from 'astro:transitions'
 import Favicons from './Favicons.astro'
+
+interface Props {
+  title?: string
+  description?: string
+  image?: string
+  hasHeadSlot?: boolean
+}
+
+const {
+  title,
+  description = SITE.description,
+  image,
+  hasHeadSlot = false,
+} = Astro.props
+
+const formattedTitle = title
+  ? title.toLowerCase() === 'home'
+    ? `${SITE.title} | Anime & Manga Thoughts, Reviews & Breakdowns`
+    : `${title} | ${SITE.title}`
+  : `${SITE.title} | Anime & Manga Thoughts, Reviews & Breakdowns`
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString()
+const ogImage = image
+  ? new URL(image, Astro.site).toString()
+  : new URL('/static/1200x630.png', Astro.site).toString()
 ---
 
 <head>
@@ -12,11 +37,44 @@ import Favicons from './Favicons.astro'
     content="width=device-width, initial-scale=1.0, user-scalable=yes"
   />
   <meta name="generator" content={Astro.generator} />
-  <meta name="robots" content="index, follow" />
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  />
   <meta
     name="google-site-verification"
     content="A18JlDIUEGa7KPKjNlgfITGZw72N1xJHQmdiIB1V6yk"
   />
+  <link rel="preconnect" href="https://rsms.me/" />
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+  {
+    !hasHeadSlot && (
+      <>
+        <title>{formattedTitle}</title>
+        <meta name="title" content={formattedTitle} />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalURL} />
+
+        <meta property="og:title" content={formattedTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:alt" content={formattedTitle} />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content={SITE.locale} />
+        <meta property="og:site_name" content={SITE.title} />
+        <meta property="og:url" content={canonicalURL} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={formattedTitle} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:image:alt" content={formattedTitle} />
+        <meta name="twitter:creator" content="@hokori_otakuu" />
+        <meta name="twitter:site" content="@hokori_otakuu" />
+      </>
+    )
+  }
   <meta name="HandheldFriendly" content="True" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />

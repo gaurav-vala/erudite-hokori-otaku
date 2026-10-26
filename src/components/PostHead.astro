@@ -24,6 +24,10 @@ const publishedDate = post.data.date?.toISOString()
 <meta name="description" content={description} />
 <meta name="author" content={author} />
 <link rel="canonical" href={canonicalURL} />
+<meta
+  name="robots"
+  content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+/>
 
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />

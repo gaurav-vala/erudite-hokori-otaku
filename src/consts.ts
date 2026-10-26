@@ -4,7 +4,7 @@ export const SITE: Site = {
   title: 'Hokori Otaku',
   description:
     'Welcome to my world. I’m passionate about anime, manga, movies, music, and books. I love all kinds of pop culture and share my interests on Instagram. Join me if you’re interested!',
-  href: 'https://www.hokoriotaku.space/',
+  href: 'https://hokoriotaku.vercel.app',
   author: 'Gaurav',
   locale: 'en-US',
   featuredPostCount: 4,

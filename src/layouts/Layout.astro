@@ -8,12 +8,25 @@ import Header from '@/components/Header.astro'
 import { SITE } from '@/consts'
 import { cn } from '@/lib/utils'
 
-const { isWide = false } = Astro.props
+interface Props {
+  title?: string
+  description?: string
+  image?: string
+  isWide?: boolean
+}
+
+const { title, description, image, isWide = false } = Astro.props
+const hasHeadSlot = Astro.slots.has('head')
 ---
 
 <!doctype html>
 <html lang={SITE.locale}>
-  <Head>
+  <Head
+    title={title}
+    description={description}
+    image={image}
+    hasHeadSlot={hasHeadSlot}
+  >
     <slot name="head" />
   </Head>
   <body>
